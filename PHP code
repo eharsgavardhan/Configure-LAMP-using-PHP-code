@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP with HTML & CSS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 0;
+        }
+        main {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            margin-top: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My PHP Application</h1>
+    </header>
+    <main>
+        <h2>Server Information</h2>
+        <p><strong>Current Server Time:</strong> 
+            <?php 
+                echo date('Y-m-d H:i:s'); 
+            ?>
+        </p>
+
+        <h2>Database Connection</h2>
+        <?php
+        // Database configuration
+        $host = "localhost";
+        $username = "testuser";  // Replace with your MySQL username
+        $password = "";      // Replace with your MySQL password
+        $dbname = "testdb"; // Replace with your database name
+
+        // Try connecting to the database
+        try {
+            $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "<p class='success'>Successfully connected to the database!</p>";
+        } catch (PDOException $e) {
+            echo "<p class='error'>Database connection failed: " . $e->getMessage() . "</p>";
+        }
+
+        // Close the connection
+        $conn = null;
+        ?>
+    </main>
+    <footer>
+        <p>&copy; <?php echo date('Y'); ?> My PHP Application</p>
+    </footer>
+</body>
+</html>
 
